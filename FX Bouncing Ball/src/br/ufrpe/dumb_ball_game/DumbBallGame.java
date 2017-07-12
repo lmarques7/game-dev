@@ -12,15 +12,23 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class DumbBallGame extends Application implements EventHandler<ActionEvent> {
     
-    private double dx = 7; //Componente x da velocidade
-    private double dy = 3; //Componente y da velocidade
+    private double dx = 4; //Componente x da velocidade
+    private double dy = 2; //Componente y da velocidade
     private Circle ball;
+    private Text label = new Text("FPS: ");
     private Pane canvas;
+    
+    
+    private int counter = 0;
+    private long elapsedTime = 0;
+    private long lastTime = 0;
+      
 
     @Override
     public void start(Stage stage) {
@@ -28,10 +36,14 @@ public class DumbBallGame extends Application implements EventHandler<ActionEven
         this.canvas = new Pane();
         Scene scene = new Scene(canvas, 300, 300, Color.TRANSPARENT);
         
-        this.ball = new Circle(10, Color.DARKSLATEBLUE);
+        this.ball = new Circle(10, Color.BLUEVIOLET);
         this.ball.relocate(5, 5);
 
+        this.label.setLayoutX(10);
+        this.label.setLayoutY(10);
+        
         canvas.getChildren().add(ball);
+        canvas.getChildren().add(this.label);
 
         // Descomentar se quiser deixar o canvas transparente
 //        stage.initStyle(StageStyle.TRANSPARENT);
@@ -46,7 +58,7 @@ public class DumbBallGame extends Application implements EventHandler<ActionEven
         stage.setScene(scene);
         stage.show();
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), this));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(25), this));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
@@ -57,6 +69,15 @@ public class DumbBallGame extends Application implements EventHandler<ActionEven
 
     @Override
     public void handle(ActionEvent event) {
+        if (lastTime != 0) {
+            elapsedTime += (System.currentTimeMillis() - lastTime);
+        }
+        if (elapsedTime >= 1000) {
+            elapsedTime = 0;
+            this.label.setText("FPS: " + this.counter);
+            this.counter = 0;
+        }
+         
         //Mover a bola
         ball.setLayoutX(ball.getLayoutX() + dx);
         ball.setLayoutY(ball.getLayoutY() + dy);
@@ -75,5 +96,7 @@ public class DumbBallGame extends Application implements EventHandler<ActionEven
             dy = -dy;
 
         }
+        this.lastTime = System.currentTimeMillis();
+        this.counter++;
     }
 }
