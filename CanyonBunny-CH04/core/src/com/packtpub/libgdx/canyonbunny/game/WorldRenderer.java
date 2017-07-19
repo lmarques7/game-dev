@@ -25,6 +25,8 @@ import com.packtpub.libgdx.canyonbunny.util.Constants;
 
 public class WorldRenderer implements Disposable {
 
+	private static final String TAG = WorldRenderer.class.getName();
+
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 	private WorldController worldController;

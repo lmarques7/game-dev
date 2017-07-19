@@ -17,28 +17,24 @@
 
 package com.packtpub.libgdx.canyonbunny.util;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector3;
-import com.packtpub.libgdx.canyonbunny.game.WorldController;
+import com.badlogic.gdx.math.Vector2;
 
 public class CameraHelper {
 
-	private static final String TAG = WorldController.class.getName();
-	
+	private static final String TAG = CameraHelper.class.getName();
+
 	private final float MAX_ZOOM_IN = 0.25f;
 	private final float MAX_ZOOM_OUT = 10.0f;
 
-	private Vector3 position;
-	private Vector3 direction;
+	private Vector2 position;
 	private float zoom;
 	private Sprite target;
 
 	public CameraHelper () {
-		position = new Vector3();
-		direction = new Vector3(0, 0, -1);
+		position = new Vector2();
 		zoom = 1.0f;
 	}
 
@@ -49,15 +45,11 @@ public class CameraHelper {
 		position.y = target.getY() + target.getOriginY();
 	}
 
-	public void setPosition (float x, float y, float z) {
-		this.position.set(x, y, z);
-	}
-	
-	public void setDirection(float x, float y, float z) {
-		this.direction.set(x, y, z);
+	public void setPosition (float x, float y) {
+		this.position.set(x, y);
 	}
 
-	public Vector3 getPosition () {
+	public Vector2 getPosition () {
 		return position;
 	}
 
@@ -92,23 +84,8 @@ public class CameraHelper {
 	public void applyTo (OrthographicCamera camera) {
 		camera.position.x = position.x;
 		camera.position.y = position.y;
-		camera.position.z = position.z;
 		camera.zoom = zoom;
-		if (direction == null) {
-			direction = camera.direction;
-			Gdx.app.debug(TAG, String.format("Camera direction (x,y,z): (%f,%f,%f)", direction.x, direction.y, direction.z));
-		} else {
-			camera.direction.x = direction.x;
-			camera.direction.y = direction.y;
-			camera.direction.z = direction.z;
-		}
 		camera.update();
 	}
-
-	public Vector3 getDirection() {
-		return this.direction;
-	}
-
-
 
 }
