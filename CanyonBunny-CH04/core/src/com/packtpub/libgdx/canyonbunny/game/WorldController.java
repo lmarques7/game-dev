@@ -54,11 +54,11 @@ public class WorldController extends InputAdapter {
 		regions.add(Assets.instance.bunny.head);
 		regions.add(Assets.instance.feather.feather);
 		regions.add(Assets.instance.goldCoin.goldCoin);
-		regions.add(Assets.instance.rock.edge);
-		regions.add(Assets.instance.rock.middle);
-		regions.add(Assets.instance.levelDecoration.cloud01);
-		regions.add(Assets.instance.levelDecoration.cloud02);
-		regions.add(Assets.instance.levelDecoration.cloud03);
+//		regions.add(Assets.instance.rock.edge);
+//		regions.add(Assets.instance.rock.middle);
+//		regions.add(Assets.instance.levelDecoration.cloud01);
+//		regions.add(Assets.instance.levelDecoration.cloud02);
+//		regions.add(Assets.instance.levelDecoration.cloud03);
 		// Create new sprites using a random texture region
 		for (int i = 0; i < testSprites.length; i++) {
 			Sprite spr = new Sprite(regions.random());
