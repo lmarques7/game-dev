@@ -248,7 +248,8 @@ public class WorldController extends InputAdapter {
 
 	private void backToMenu () {
 		// switch to menu screen
-		ScreenTransition transition = ScreenTransitionSlide.init(0.75f, ScreenTransitionSlide.DOWN, false, Interpolation.bounceOut);
+		ScreenTransition transition = ScreenTransitionSlide.init(0.75f, ScreenTransitionSlide.UP, false, Interpolation.bounceOut);
+		
 		game.setScreen(new MenuScreen(game), transition);
 	}
 }
